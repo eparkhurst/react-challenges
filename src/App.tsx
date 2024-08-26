@@ -7,10 +7,6 @@ function App() {
 
   return (
     <>
-      <div className="flex h-16 justify-between bg-slate-100">
-        <div className="p-4">Logo</div>
-        <div>Navigation</div>
-      </div>
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
