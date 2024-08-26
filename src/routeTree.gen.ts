@@ -13,6 +13,7 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as TodoImport } from './routes/todo'
 import { Route as Challenge1Import } from './routes/challenge1'
 
 // Create Virtual Routes
@@ -32,6 +33,11 @@ const AboutLazyRoute = AboutLazyImport.update({
   path: '/about',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
+
+const TodoRoute = TodoImport.update({
+  path: '/todo',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const Challenge1Route = Challenge1Import.update({
   path: '/challenge1',
@@ -61,6 +67,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Challenge1Import
       parentRoute: typeof rootRoute
     }
+    '/todo': {
+      id: '/todo'
+      path: '/todo'
+      fullPath: '/todo'
+      preLoaderRoute: typeof TodoImport
+      parentRoute: typeof rootRoute
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -83,6 +96,7 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
   Challenge1Route,
+  TodoRoute,
   AboutLazyRoute,
   TestLazyRoute,
 })
@@ -97,6 +111,7 @@ export const routeTree = rootRoute.addChildren({
       "children": [
         "/",
         "/challenge1",
+        "/todo",
         "/about",
         "/test"
       ]
@@ -106,6 +121,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/challenge1": {
       "filePath": "challenge1.tsx"
+    },
+    "/todo": {
+      "filePath": "todo.tsx"
     },
     "/about": {
       "filePath": "about.lazy.tsx"

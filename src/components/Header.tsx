@@ -37,6 +37,12 @@ const Header = () => {
           C1
         </Link>
         <Link
+          to="/todo"
+          className="flex items-center justify-center border-b p-2 md:border-none [&.active]:font-bold"
+        >
+          Todo
+        </Link>
+        <Link
           to="/"
           className="flex items-center justify-center border-b p-2 md:border-none [&.active]:font-bold"
         >
@@ -53,12 +59,6 @@ const Header = () => {
           className="flex items-center justify-center border-b p-2 md:border-none [&.active]:font-bold"
         >
           Services
-        </Link>
-        <Link
-          to="/about"
-          className="flex items-center justify-center border-b p-2 md:border-none [&.active]:font-bold"
-        >
-          Contact
         </Link>
       </div>
       <button
