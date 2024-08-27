@@ -49,17 +49,17 @@ const Header = () => {
           Accordian
         </Link>
         <Link
+          to="/list"
+          className="flex items-center justify-center border-b p-2 md:border-none [&.active]:font-bold"
+        >
+          List
+        </Link>
+        <Link
           to="/"
           className="flex items-center justify-center border-b p-2 md:border-none [&.active]:font-bold"
         >
           Home
         </Link>{' '}
-        <Link
-          to="/about"
-          className="flex items-center justify-center border-b p-2 md:border-none [&.active]:font-bold"
-        >
-          About
-        </Link>
       </div>
       <button
         onClick={() => {
