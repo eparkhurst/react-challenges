@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { FormEvent, useEffect, useState } from 'react';
+import Card from '../components/Card';
 
 export const Route = createFileRoute('/todo')({
   component: () => <Todos />,
@@ -15,6 +16,12 @@ const Todos = () => {
   const [todos, setTodos] = useState<TodoType[]>([]);
   const [newTodo, setNewTodo] = useState('');
 
+  useEffect(() => {
+    const jsonTodos = localStorage.getItem('todo');
+    console.log(jsonTodos);
+    setTodos(jsonTodos ? JSON.parse(jsonTodos) : []);
+  }, []);
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!newTodo) return;
@@ -24,17 +31,11 @@ const Todos = () => {
       text: newTodo,
       completed: false,
     };
-    const newList = [...todos, newTodoObj];
+    const newList = [...todos, newTodoObj].sort((a, b) => (a.completed > b.completed ? 1 : -1));
     setTodos(newList);
     localStorage.setItem('todo', JSON.stringify(newList));
     setNewTodo('');
   };
-
-  useEffect(() => {
-    const jsonTodos = localStorage.getItem('todo');
-    console.log(jsonTodos);
-    setTodos(jsonTodos ? JSON.parse(jsonTodos) : []);
-  }, []);
 
   const checkTodo = (id: number) => () => {
     const newTodos = todos.map((todo) => {
@@ -46,6 +47,7 @@ const Todos = () => {
       }
       return todo;
     });
+    newTodos.sort((a, b) => (a.completed > b.completed ? 1 : -1));
     localStorage.setItem('todo', JSON.stringify(newTodos));
     setTodos(newTodos);
   };
@@ -57,9 +59,8 @@ const Todos = () => {
   };
 
   return (
-    <div className="flex w-full justify-center p-8">
-      <div className="items center flex h-fit w-[400px] flex-col justify-center rounded bg-white p-4 shadow">
-        <h1 className="py-4 text-center text-3xl">Todo List</h1>
+    <Card title="Todo List">
+      <>
         <ul>
           {todos.map((todo) => (
             <div className="flex justify-between border-b p-2">
@@ -94,7 +95,7 @@ const Todos = () => {
             <button>Add Todo</button>
           </div>
         </form>
-      </div>
-    </div>
+      </>
+    </Card>
   );
 };

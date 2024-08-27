@@ -43,6 +43,12 @@ const Header = () => {
           Todo
         </Link>
         <Link
+          to="/accordian"
+          className="flex items-center justify-center border-b p-2 md:border-none [&.active]:font-bold"
+        >
+          Accordian
+        </Link>
+        <Link
           to="/"
           className="flex items-center justify-center border-b p-2 md:border-none [&.active]:font-bold"
         >
@@ -54,18 +60,12 @@ const Header = () => {
         >
           About
         </Link>
-        <Link
-          to="/about"
-          className="flex items-center justify-center border-b p-2 md:border-none [&.active]:font-bold"
-        >
-          Services
-        </Link>
       </div>
       <button
         onClick={() => {
           setIsOpen(!ddOpen);
         }}
-        className="md:hidden"
+        className="bg-transparent md:hidden"
       >
         <SvgHamburger width={44} height={44} />
       </button>
